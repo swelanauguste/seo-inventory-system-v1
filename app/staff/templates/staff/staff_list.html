@@ -2,14 +2,14 @@
 
 
 {% block head_title %}
-Suppliers
+Staff
 {% endblock head_title %}
 
 {% block content %}
 <div class="container my-5 min-vh-100">
-    <h1 class="display-1 border-bottom">Supplier list</h1>
-    <a href="{% url 'suppliers:create' %}"
-        class="btn btn-dark my-3">Add a supplier</a>
+    <h1 class="display-1 border-bottom">Staff</h1>
+    <!-- <a href="#"
+        class="btn btn-dark my-3">Add a supplier</a> -->
     <div style="max-width: 28rem;">
         <form class="my-3 mx-auto"
             action="{% url 'suppliers:search' %}"
@@ -17,7 +17,7 @@ Suppliers
             <input class="form-control form-control-sm rounded-pill"
                 type="text"
                 name="q"
-                placeholder="Search suppliers by (name, description, email, phone, address, district)..."
+                placeholder="Search staff by (name, email, ext, position)..."
                 aria-label="Search">
         </form>
     </div>
@@ -28,7 +28,7 @@ Suppliers
             <td>
                 <a class="text-decoration-none text-dark"
                     href="{{object.get_absolute_url}}">
-                    {{object.supplier_name|title}}
+                    {{object.get_full_name|title}}
                 </a>
             </td>
         </tr>

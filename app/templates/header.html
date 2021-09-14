@@ -11,9 +11,9 @@
                 class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/"
                         class="nav-link px-2 link-light">Overview</a></li>
+                <li><a href="{% url 'staff:list' %}"
+                        class="nav-link px-2 link-light">Staff</a></li>
                 <!-- <li><a href="#"
-                        class="nav-link px-2 link-light">Inventory</a></li>
-                <li><a href="#"
                         class="nav-link px-2 link-light">Customers</a></li> 
                  <li><a href="#"
                         class="nav-link px-2 link-light">Products</a></li>  -->
@@ -26,9 +26,11 @@
                     <ul class="dropdown-menu"
                         aria-labelledby="dropdown03">
                         <li><a class="dropdown-item"
-                                href="{% url 'suppliers:create' %}">Add a supplier</a></li>
+                                href="{% url 'suppliers:create' %}">Add a
+                                supplier</a></li>
                         <li><a class="dropdown-item"
-                                href="{% url 'suppliers:list' %}">List of suppliers</a></li>
+                                href="{% url 'suppliers:list' %}">List of
+                                suppliers</a></li>
                     </ul>
                 </li>
             </ul>
@@ -44,15 +46,12 @@
 
             <div class="dropdown text-end">
                 <a href="#"
-                    class="d-block link-dark text-decoration-none dropdown-toggle"
+                    class="d-block link-light text-decoration-none dropdown-toggle"
                     id="dropdownUser1"
                     data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    <img src="https://github.com/mdo.png"
-                        alt="mdo"
-                        width="32"
-                        height="32"
-                        class="rounded-circle">
+                    <button style="height: 3rem; width:3rem;"
+                        class="btn btn-light rounded-circle">{{request.user.staff.get_staff_initials}}</button>
                 </a>
                 <ul class="dropdown-menu text-small"
                     aria-labelledby="dropdownUser1">

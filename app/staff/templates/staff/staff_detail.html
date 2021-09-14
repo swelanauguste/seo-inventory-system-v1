@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block head_title %}
+{{object|title}}
+{% endblock head_title %}
+
+
+{% block content %}
+<div class="container my-5 min-vh-100">
+    <h1 class="display-1 border-bottom">{{object|title}}</h1>
+
+    <a href="{% url 'staff:list' %}"
+        class="btn btn-dark my-3">Staff list</a>
+    <hr>
+    <div class="container">
+        <div class="card rouneded shadow my-5"
+            style="max-width: 28rem;">
+            <div class="card-body">
+                <ul>
+                    <li>
+                        {{object.employment_id|default:"No employment id"}}
+                    </li>
+                    <li>
+                        <a class="text-dark"
+                            href="tel:{{object.ext|default:'#'}}">
+                            {{object.ext|default:'No phone number'}}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-dark"
+                            href="mailto:{{object.get_user_email|default:'#'}}">
+                            {{object.get_user_email|default:'No email'}}
+                        </a>
+                    </li>
+                    <li>
+                        {{object.position|default:'No position'|title}}
+                    </li>
+
+                    <li>
+                        {{object.department|default:'No department'|title}}
+                    </li>
+
+                </ul>
+            </div>
+            <div class="card-footer">
+                <div class="small d-grid gap-2 d-md-block text-end">
+                    <a href="{{object.get_update_url}}"
+                        class="btn btn-warning">Edit</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{% endblock content %}

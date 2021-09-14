@@ -5,7 +5,7 @@ from mixins.assets import DISTRICT_LIST, TimeStampMixin
 
 
 class Supplier(TimeStampMixin):
-    supplier_name = models.CharField("supplier's name",max_length=255, unique=True)
+    supplier_name = models.CharField("supplier's name", max_length=255, unique=True)
     description = models.TextField(blank=True, null=True)
     slug = models.SlugField(max_length=255, null=True, unique=True)
     email = models.EmailField(blank=True)

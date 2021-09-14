@@ -4,15 +4,16 @@
 
 
 {% block head_title %}
-Create Supplier
+{{object|title}}
 {% endblock head_title %}
 
 
 {% block content %}
 <div class="container my-5 min-vh-100">
-    <h1 class="display-1 border-bottom">Add Supplier</h1>
-    <a href="{% url 'suppliers:list' %}" class="btn btn-dark my-3">
-        Suppliers List</a>
+    <h1 class="display-">{{object|title}}</h1>
+    <hr>
+    <a href="{{object.get_absolute_url}}"
+    class="btn btn-dark">Cancel</a>
     <hr>
     <div class="container">
         <div class="card rouneded shadow my-5"
@@ -23,9 +24,9 @@ Create Supplier
                     {% csrf_token %}
                     {{form|crispy}}
                     <small class="d-grid gap-2 d-md-block mt-3 text-end">
-                        <button class="btn btn-dark"
-                            type="submit">Add</button>
-                        <a href="{% url 'suppliers:list' %}"
+                        <button class="btn btn-warning"
+                            type="submit">Update</button>
+                        <a href="{{object.get_absolute_url}}"
                             class="btn btn-secondary">Cancel</a>
                         
                     </small>

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
 
 {% block head_title %}
 {{object|title}}
@@ -8,13 +9,14 @@
 
 {% block content %}
 <div class="container my-5 min-vh-100">
-    <h1 class="display-">{{object|title}}</h1>
-    <hr>
+    <h1 class="display-1 border-bottom">{{object|title}}</h1>
+    
     <a href="{% url 'suppliers:list' %}" class="btn btn-dark my-3">Suppliers</a>
     <hr>
     <div class="container">
         <div class="card rouneded shadow my-5"
             style="max-width: 28rem;">
+          
             <div class="card-body">
                 <ul>
                     <li>
@@ -42,16 +44,16 @@
                     <p>
                         {{object.description|default:'No description'}}
                     </p>
+                   
                 </ul>
                
-                <small class="small text-muted">updated {{object.updated_at}}
-                    by {{object.updated_by}}</small>
+                <p class="small text-muted text-end m-0">updated {{object.updated_at|naturaltime}}
+                    by {{object.updated_by}}</p>
             </div>
             <div class="card-footer">
-                <small class="small d-grid gap-2 d-md-block text-end">
-                    <a href="{% url 'suppliers:list' %}" class="btn btn-secondary">Suppliers</a>
+                <div class="small d-grid gap-2 d-md-block text-end">
                     <a href="{{object.get_update_url}}" class="btn btn-warning">Edit</a>
-                </small>
+                </div>
             </div>
         </div>
        

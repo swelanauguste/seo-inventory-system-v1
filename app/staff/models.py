@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.text import slugify
 from django.urls import reverse
 
 User = settings.AUTH_USER_MODEL
@@ -24,6 +25,7 @@ class Department(TimeStampMixin):
 
 class Staff(models.Model):
     staff = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
+    slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
     employment_id = models.CharField(max_length=10, unique=True, null=True, blank=True)
     first_name = models.CharField(max_length=200, null=True, blank=True)
     middle_name = models.CharField(max_length=200, null=True, blank=True)
@@ -38,11 +40,11 @@ class Staff(models.Model):
     is_seo = models.BooleanField("SEO", default=False)
     is_ag = models.BooleanField("AG", default=False)
 
-    # def get_absolute_url(self):
-    #     return reverse("staff:staff-detail", kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse("staff:detail", kwargs={"slug": self.slug})
 
-    # def get_update_url(self):
-    #     return reverse("staff:staff-update", kwargs={"pk": self.pk})
+    def get_update_url(self):
+        return reverse("staff:update", kwargs={"slug": self.slug})
 
     class Meta:
         ordering = ["last_name", "first_name"]
@@ -62,5 +64,12 @@ class Staff(models.Model):
     def get_user_email(self):
         return self.staff.email
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.staff)
+        super(Staff, self).save(*args, **kwargs)
+
     def __str__(self):
+        if self.first_name and self.last_name:
+            return "%s, %s" % (self.last_name, self.first_name)
         return self.staff.username
