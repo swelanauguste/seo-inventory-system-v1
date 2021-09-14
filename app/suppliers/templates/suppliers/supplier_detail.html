@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}
+{{object|title}}
+{% endblock head_title %}
+
+
+{% block content %}
+<div class="container my-5 min-vh-100">
+    <h1 class="display-">{{object|title}}</h1>
+    <hr>
+    <a href="{% url 'suppliers:list' %}" class="btn btn-dark my-3">Suppliers</a>
+    <hr>
+    <div class="container">
+        <div class="card rouneded shadow my-5"
+            style="max-width: 28rem;">
+            <div class="card-body">
+                <ul>
+                    <li>
+                        <a target="_blank"
+                            href="{{object.website}}">
+                            {{object.website}}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-dark"
+                            href="tel:{{object.phone|default:'#'}}">
+                            {{object.phone|default:'No phone number'}}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-dark"
+                            href="mailto:{{object.email|default:'#'}}">
+                            {{object.email|default:'No email'}}
+                        </a>
+                    </li>
+                    <li>
+                        {{object.get_full_address|default:'No address'}}
+                    </li>
+
+                    <p>
+                        {{object.description|default:'No description'}}
+                    </p>
+                </ul>
+               
+                <small class="small text-muted">updated {{object.updated_at}}
+                    by {{object.updated_by}}</small>
+            </div>
+            <div class="card-footer">
+                <small class="small d-grid gap-2 d-md-block text-end">
+                    <a href="{% url 'suppliers:list' %}" class="btn btn-secondary">Suppliers</a>
+                    <a href="{{object.get_update_url}}" class="btn btn-warning">Edit</a>
+                </small>
+            </div>
+        </div>
+       
+
+    </div>
+</div>
+{% endblock content %}

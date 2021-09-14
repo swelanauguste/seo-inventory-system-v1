@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block head_title %}
+{{object|title}}
+{% endblock head_title %}
+
+
+{% block content %}
+<div class="container my-5 min-vh-100">
+    <h1 class="display-">{{object|title}}</h1>
+    <hr>
+    <a href="{{object.get_absolute_url}}"
+    class="btn btn-dark">Cancel</a>
+    <hr>
+    <div class="container">
+        <div class="card rouneded shadow my-5"
+            style="max-width: 28rem;">
+            <div class="card-body p-5">
+                <form action=""
+                    method="post">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <small class="d-grid gap-2 d-md-block mt-3 text-end">
+                        <button class="btn btn-warning"
+                            type="submit">Update</button>
+                        <a href="{{object.get_absolute_url}}"
+                            class="btn btn-secondary">Cancel</a>
+                        
+                    </small>
+                </form>
+
+            </div>
+
+
+        </div>
+    </div>
+    {% endblock content %}

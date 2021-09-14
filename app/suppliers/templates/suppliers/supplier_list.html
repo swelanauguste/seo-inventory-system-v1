@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}
+Suppliers
+{% endblock head_title %}
+
+
+
+{% block content %}
+<div class="container my-5 min-vh-100">
+    <h1 class="display-">Suppliers</h1>
+    <hr>
+    <a href="{% url 'suppliers:create' %}" class="btn btn-dark my-3">Add a Supplier</a>
+    <hr>
+
+    <table class="table table-hover">
+        {% for object in object_list %}
+        <tr>
+            <td>
+                <a class="text-decoration-none text-dark"
+                    href="{{object.get_absolute_url}}">
+                    {{object.supplier_name|title}}
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td class="text-center">No Suppliers as yet</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}
