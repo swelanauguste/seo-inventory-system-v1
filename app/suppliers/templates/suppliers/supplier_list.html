@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 
+
 {% block head_title %}
 Suppliers
 {% endblock head_title %}
@@ -9,7 +10,7 @@ Suppliers
 <div class="container my-5 min-vh-100">
     <h1 class="display-1 border-bottom">Supplier list</h1>
     <a href="{% url 'suppliers:create' %}"
-        class="btn btn-dark my-3">Add a supplier</a>
+        class="btn btn-lg btn-dark rounded-pill mx-auto my-3">Add a supplier</a>
     <div style="max-width: 28rem;">
         <form class="my-3 mx-auto"
             action="{% url 'suppliers:search' %}"
@@ -20,6 +21,15 @@ Suppliers
                 placeholder="Search suppliers by (name, description, email, phone, address, district)..."
                 aria-label="Search">
         </form>
+    </div>
+
+    <div class="my-3"
+        style="max-width: 28rem;">
+        {% for category in supplier_category_list %}
+        <a class="btn btn-sm btn-outline-dark rounded-pill mb-2"
+            href="{% url 'suppliers:category-list' category.slug %}">{{category}}</a>
+        {% endfor %}
+
     </div>
     <table class="table table-hover my-5"
         style="max-width: 28rem;">

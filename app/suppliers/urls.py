@@ -6,6 +6,11 @@ app_name = "suppliers"
 
 urlpatterns = [
     path("", views.SupplierListView.as_view(), name="list"),
+    path(
+        "category/<slug:slug>",
+        views.SupplierCategoryListView.as_view(),
+        name="category-list",
+    ),
     path("search", views.SupplierSearchView.as_view(), name="search"),
     path("detail/<slug:slug>", views.SupplierDetailView.as_view(), name="detail"),
     path("update/<slug:slug>", views.SupplierUpdateView.as_view(), name="update"),

@@ -6,6 +6,13 @@ from .forms import SupplierCreateForm, SupplierUpdateForm
 from .models import Supplier
 
 
+class SupplierCategoryListView(ListView):
+    model = Supplier
+
+    def get_queryset(self):
+        return Supplier.objects.filter(category__slug=self.kwargs["slug"])
+
+
 class SupplierSearchView(ListView):
     model = Supplier
     paginate_by = 10
@@ -44,5 +51,5 @@ class SupplierCreateView(CreateView):
 
 class SupplierUpdateView(UpdateView):
     model = Supplier
-    form_class = SupplierCreateForm
+    form_class = SupplierUpdateForm
     template_name_suffix = "_update_form"

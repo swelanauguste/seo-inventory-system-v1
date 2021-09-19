@@ -4,9 +4,30 @@ from django.utils.text import slugify
 from mixins.assets import DISTRICT_LIST, TimeStampMixin
 
 
+class Category(TimeStampMixin):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+        ordering = ["slug"]
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("suppliers:category_detail", kwargs={"slug": self.slug})
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
+
+
 class Supplier(TimeStampMixin):
     supplier_name = models.CharField("supplier's name", max_length=255, unique=True)
     description = models.TextField(blank=True, null=True)
+    category = models.ManyToManyField(Category, blank=True)
     slug = models.SlugField(max_length=255, null=True, unique=True)
     email = models.EmailField(blank=True)
     phone = models.CharField(max_length=255, blank=True)
