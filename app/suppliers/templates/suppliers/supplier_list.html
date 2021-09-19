@@ -10,7 +10,8 @@ Suppliers
 <div class="container my-5 min-vh-100">
     <h1 class="display-1 border-bottom">Supplier list</h1>
     <a href="{% url 'suppliers:create' %}"
-        class="btn btn-lg btn-dark rounded-pill mx-auto my-3">Add a supplier</a>
+        class="btn btn-lg btn-dark rounded-pill mx-auto my-3">Add a
+        supplier</a>
     <div style="max-width: 28rem;">
         <form class="my-3 mx-auto"
             action="{% url 'suppliers:search' %}"
@@ -31,22 +32,22 @@ Suppliers
         {% endfor %}
 
     </div>
-    <table class="table table-hover my-5"
+
+    <ul class="list-group"
         style="max-width: 28rem;">
         {% for object in object_list %}
-        <tr>
-            <td>
-                <a class="text-decoration-none text-dark"
-                    href="{{object.get_absolute_url}}">
-                    {{object.supplier_name|title}}
-                </a>
-            </td>
-        </tr>
+        <a class="text-decoration-none text-dark"
+            href="{{object.get_absolute_url}}">
+            <li class="list-group-item border-0">
+                {{object.supplier_name|title}}
+            </li>
+        </a>
+
         {% empty %}
-        <tr>
-            <td class="text-center">No Suppliers</td>
-        </tr>
+        <li class="list-group-item">No Suppliers</li>
         {% endfor %}
-    </table>
+
+    </ul>
+  
 </div>
 {% endblock content %}
