@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+
+
+{% block head_title %}
+Bills
+{% endblock head_title %}
+
+{% block content %}
+<div class="container my-5 min-vh-100">
+    <h1 class="display-1 border-bottom">Bill list</h1>
+    <a href="{% url 'purchases:create' %}"
+        class="btn btn-lg btn-dark rounded-pill mx-auto my-3">Create a
+        bill</a>
+    <div style="max-width: 28rem;">
+        <form class="my-3 mx-auto"
+            action="{% url 'suppliers:search' %}"
+            method="get">
+            <input class="form-control form-control-sm rounded-pill"
+                type="text"
+                name="q"
+                placeholder="Search suppliers by (name, description, email, phone, address, district)..."
+                aria-label="Search">
+        </form>
+    </div>
+    <div class="table-responsive my-5">
+        <table class="table table-sm" style="max-width: 28rem;">
+            <!-- <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead> -->
+            <tbody>
+                {% for object in object_list %}
+                <tr>
+                    <th scope="row">
+                        <a class="text-decoration-none text-primary"
+                            href="{{object.get_absolute_url}}">
+                            {{object.purchase_order_number}}
+                        </a>
+                    </th>
+                    <td>{{object.supplier}}</td>
+                    <td>${{object.total}}</td>
+                </tr>
+                {% empty %}
+                <td>@No Bills</td>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock content %}

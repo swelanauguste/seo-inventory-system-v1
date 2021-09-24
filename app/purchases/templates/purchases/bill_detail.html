@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block head_title %}
+{{object|title}}
+{% endblock head_title %}
+
+
+{% block content %}
+<div class="container my-5 min-vh-100">
+    <h1 class="display-1 border-bottom">PO{{object|title}}</h1>
+
+    <a href="{% url 'purchases:list' %}"
+        class="btn btn-dark my-3">Bills</a>
+    <hr>
+    <div class="container">
+        <div class="card rouneded shadow my-5"
+            style="max-width: 32rem;">
+            <div class="card-header text-end">
+                <em class="text-primary">
+                    {{object.paid|yesno:"Paid,Payment pending,maybe"}}
+                </em>
+            </div>
+
+            <div class="card-body">
+                <ul class="list-unstyled p-3">
+                    <li>
+                        {{object.supplier}}
+                    </li>
+                    <li>
+                        <i
+                            class="bi bi-currency-dollar"></i>{{object.total|intcomma}}
+                    </li>
+                    <li>
+                        <a class="text-dark"
+                            target="_blank"
+                            href="{{object.file.url|default:'#'}}">
+                            <i class="bi bi-file-earmark-pdf-fill fs-1"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <p class="small text-muted text-end m-0">updated
+                    {{object.updated_at|naturaltime}}
+                    by {{object.updated_by.staff}}</p>
+            </div>
+            <div class="card-footer">
+                <div class="small d-grid gap-2 d-md-block text-end">
+                    <a href="{{object.get_update_url}}"
+                        class="btn btn-warning">Edit</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{% endblock content %}

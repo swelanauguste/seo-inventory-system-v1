@@ -1,9 +1,11 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, UpdateView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
+from django.shortcuts import render
+from django.views.generic import DetailView, ListView, UpdateView
 
-from .models import Staff
 from .forms import StaffUpdateForm
+from .models import Staff
+
 
 class SearchSearchView(ListView):
     model = Staff

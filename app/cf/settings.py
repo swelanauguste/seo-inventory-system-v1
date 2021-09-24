@@ -22,6 +22,7 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "staff.apps.StaffConfig",
     "suppliers.apps.SuppliersConfig",
+    "purchases.apps.PurchasesConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

@@ -1,6 +1,9 @@
 from django.contrib import admin
 
-from .models import Supplier, Category
+from .models import Supplier, Category, SupplierAccountNumber
+
+
+admin.site.register(SupplierAccountNumber)
 
 
 @admin.register(Category)

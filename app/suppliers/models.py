@@ -71,3 +71,18 @@ class Supplier(TimeStampMixin):
 
     def __str__(self):
         return self.supplier_name
+
+
+class SupplierAccountNumber(TimeStampMixin):
+    supplier = models.ForeignKey(
+        Supplier, related_name="supplier_account_numbers", on_delete=models.CASCADE
+    )
+    account_number = models.CharField(max_length=255)
+    is_active = models.BooleanField(default=True)
+    is_deleted = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return self.account_number
